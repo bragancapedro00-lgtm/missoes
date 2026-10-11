@@ -9,8 +9,8 @@ const DEFAULT_CONFIG = {
   adminWhatsApp: "5521988110139", 
   adminName: "Coordenação de Missões",
   ticketPrice: 30.00,
-  eventDateIso: "2026-10-24T09:00:00",
-  eventDateDisplay: "24/10 (Sábado) a partir das 09h",
+  eventDateIso: "2026-10-24T08:00:00",
+  eventDateDisplay: "24/10 (Sábado) de 08h às 12h",
   eventLocation: "Igreja Batista Memorial em Magé",
   eventTitle: "Workshop de Missões: Fora da Proteção do Templo"
 };
@@ -29,8 +29,11 @@ function loadStoredConfig() {
       if (parsed.adminWhatsApp === "5511999999999") {
         parsed.adminWhatsApp = DEFAULT_CONFIG.adminWhatsApp;
       }
-      if (!parsed.eventDateDisplay || parsed.eventDateDisplay.includes("12h") || parsed.eventDateDisplay === "24/10 (Sábado) às 09h") {
+      if (!parsed.eventDateDisplay || parsed.eventDateDisplay.includes("09h") || parsed.eventDateDisplay.includes("a partir das")) {
         parsed.eventDateDisplay = DEFAULT_CONFIG.eventDateDisplay;
+      }
+      if (parsed.eventDateIso && parsed.eventDateIso.includes("09:00:00")) {
+        parsed.eventDateIso = DEFAULT_CONFIG.eventDateIso;
       }
       appConfig = { ...DEFAULT_CONFIG, ...parsed };
     }
